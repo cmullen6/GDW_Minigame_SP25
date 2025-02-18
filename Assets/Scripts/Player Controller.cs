@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour
     // Movement speed, dont forget he 'f' to make it float
     public float horizontalInput;
     public float speed = 5f;
+
+    public GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +26,12 @@ public class PlayerController : MonoBehaviour
         }
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+    {
+        // Shoots projectile
+        Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+    }
+
     }
 }
